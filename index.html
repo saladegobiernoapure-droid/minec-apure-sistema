@@ -1,234 +1,47 @@
-// ============================================================
-// MINEC APURE — Google Apps Script (versión final)
-// ============================================================
-
-var SHEET_PLANIFICACION = "PLANIFICACION";
-var SHEET_CUMPLIMIENTO  = "CUMPLIMIENTO";
-
-var HEADERS_PLAN = [
-  "ID","FECHA REGISTRO","OFICINA","SEMANA","FECHA ACTIVIDAD","ESTADO",
-  "MUNICIPIO","PARROQUIA","ACTIVIDAD POR VÉRTICE","VÉRTICE","HORA","LUGAR",
-  "PARTICIPANTES","VOCERO / RESPONSABLE","OBSERVACIONES"
-];
-
-var HEADERS_CUM = [
-  "ID","FECHA REGISTRO","OFICINA","SEMANA","FECHA ACTIVIDAD","ESTADO",
-  "MUNICIPIO","PARROQUIA","COMUNA","DIRECCIÓN","DESCRIPCIÓN Y OBJETIVO",
-  "VÉRTICE","HORA","PARTICIPANTES","INSTITUCIONES","RESPONSABLE",
-  "REGISTRO FOTOGRÁFICO (URL)"
-];
-
-// ─── POST ───
-function doPost(e) {
-  try {
-    var data = JSON.parse(e.postData.contents);
-    var ss   = SpreadsheetApp.getActiveSpreadsheet();
-
-    // Subir foto a Drive
-    if (data.accion === "subirFoto") {
-      var url = subirFotoDrive(data);
-      return jsonResp({ ok: true, url: url });
-    }
-
-    // Eliminar registro
-    if (data.accion === "eliminar") {
-      eliminarRegistro(ss, data.id);
-      return jsonResp({ ok: true, msg: "Registro eliminado." });
-    }
-
-    // Guardar registro
-    if (data.tipo === "PLANIFICACIÓN") {
-      guardarPlanificacion(ss, data);
-    } else if (data.tipo === "CUMPLIMIENTO") {
-      guardarCumplimiento(ss, data);
-    } else {
-      return jsonResp({ ok: false, msg: "Tipo no reconocido." });
-    }
-
-    return jsonResp({ ok: true, msg: "Registro guardado." });
-  } catch(err) {
-    return jsonResp({ ok: false, msg: "Error: " + err.message });
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINEC Apure — Sistema de Planificación y Cumplimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --verde: #1a6b3a;
+    --verde-claro: #2d9657;
+    --verde-oscuro: #0f3d22;
+    --dorado: #b8860b;
+    --dorado-claro: #d4a017;
+    --blanco: #ffffff;
+    --gris: #555555;
+    --gris-claro: #e8e8e8;
+    --negro: #1a1a1a;
+    --rojo: #c0392b;
+    --azul: #1a4a7a;
+    --fondo: #f4f6f4;
+    --card-bg: #ffffff;
+    --texto: #222222;
+    --borde: #d0d8d0;
   }
-}
-
-// ─── GET ───
-function doGet(e) {
-  var ss   = SpreadsheetApp.getActiveSpreadsheet();
-  var tipo = e.parameter.tipo || "TODOS";
-  var rows = leerRegistros(ss, tipo);
-  return jsonResp({ ok: true, data: rows });
-}
-
-// ─── SUBIR FOTO A DRIVE ───
-function subirFotoDrive(data) {
-  try {
-    var base64  = data.foto.split(',')[1];
-    var mimeType = data.foto.split(';')[0].split(':')[1];
-    var bytes   = Utilities.base64Decode(base64);
-    var blob    = Utilities.newBlob(bytes, mimeType);
-
-    // Nombre del archivo
-    var fecha   = data.fecha ? data.fecha.replace(/-/g, '') : Utilities.formatDate(new Date(), "America/Caracas", "yyyyMMdd");
-    var oficina = data.oficina ? data.oficina.replace(/\s+/g, '_').substring(0, 20) : 'OFICINA';
-    blob.setName(fecha + '_' + oficina + '.jpg');
-
-    // Carpeta principal
-    var rootFolder = DriveApp.getFolderById(data.folderId);
-
-    // Subcarpeta por oficina
-    var ofcName   = data.oficina || 'SIN_OFICINA';
-    var ofcFolder = obtenerOCrearCarpeta(rootFolder, ofcName);
-
-    // Subcarpeta por semana
-    var semNombre = data.semana
-      ? 'Semana_' + data.semana.replace(/\//g, '-').replace(/ /g, '_')
-      : 'Semana_sin_fecha';
-    var semFolder = obtenerOCrearCarpeta(ofcFolder, semNombre);
-
-    // Subir archivo
-    var file = semFolder.createFile(blob);
-    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-
-    return "https://drive.google.com/file/d/" + file.getId() + "/view";
-  } catch(err) {
-    return '';
-  }
-}
-
-function obtenerOCrearCarpeta(parent, nombre) {
-  var iter = parent.getFoldersByName(nombre);
-  if (iter.hasNext()) return iter.next();
-  return parent.createFolder(nombre);
-}
-
-// ─── GUARDAR PLANIFICACIÓN ───
-function guardarPlanificacion(ss, data) {
-  var sheet = obtenerHoja(ss, SHEET_PLANIFICACION, HEADERS_PLAN);
-  var ahora = Utilities.formatDate(new Date(), "America/Caracas", "dd/MM/yyyy HH:mm");
-  sheet.appendRow([
-    data.id||generarID(), ahora, data.oficina||"", data.semana||"",
-    data.fecha||"", "APURE", data.municipio||"", data.parroquia||"",
-    data.actividad||"", "VÉRTICE "+(data.vertice||""), data.hora||"",
-    data.lugar||"", data.participantes||"", data.responsable||"",
-    data.observaciones||""
-  ]);
-}
-
-// ─── GUARDAR CUMPLIMIENTO ───
-function guardarCumplimiento(ss, data) {
-  var sheet = obtenerHoja(ss, SHEET_CUMPLIMIENTO, HEADERS_CUM);
-  var ahora = Utilities.formatDate(new Date(), "America/Caracas", "dd/MM/yyyy HH:mm");
-  sheet.appendRow([
-    data.id||generarID(), ahora, data.oficina||"", data.semana||"",
-    data.fecha||"", "APURE", data.municipio||"", data.parroquia||"",
-    data.comuna||"", data.direccion||"", data.actividad||"",
-    "VÉRTICE "+(data.vertice||""), data.hora||"", data.participantes||"",
-    data.instituciones||"", data.responsable||"",
-    data.foto||""
-  ]);
-}
-
-// ─── ELIMINAR REGISTRO ───
-function eliminarRegistro(ss, id) {
-  [SHEET_PLANIFICACION, SHEET_CUMPLIMIENTO].forEach(function(nombre) {
-    var sheet = ss.getSheetByName(nombre);
-    if (!sheet || sheet.getLastRow() < 2) return;
-    var vals = sheet.getRange(1, 1, sheet.getLastRow(), 1).getValues();
-    for (var i = vals.length - 1; i >= 1; i--) {
-      if (String(vals[i][0]) === String(id)) {
-        sheet.deleteRow(i + 1); break;
-      }
-    }
-  });
-}
-
-// ─── LEER REGISTROS ───
-function leerRegistros(ss, tipo) {
-  var resultado = [];
-
-  if (tipo === "TODOS" || tipo === "PLANIFICACIÓN") {
-    var sh = ss.getSheetByName(SHEET_PLANIFICACION);
-    if (sh && sh.getLastRow() > 1) {
-      sh.getRange(2,1,sh.getLastRow()-1,sh.getLastColumn()).getValues().forEach(function(r) {
-        resultado.push({
-          id:r[0], tipo:"PLANIFICACIÓN", fechaRegistro:formatearFecha(r[1]),
-          oficina:r[2], semana:r[3], fecha:formatearFecha(r[4]), estado:r[5],
-          municipio:r[6], parroquia:r[7], actividad:r[8],
-          vertice:String(r[9]).replace("VÉRTICE ",""), hora:formatearHora(r[10]),
-          lugar:r[11], participantes:r[12], responsable:r[13], observaciones:r[14]
-        });
-      });
-    }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    min-height: 100vh;
   }
 
-  if (tipo === "TODOS" || tipo === "CUMPLIMIENTO") {
-    var sh2 = ss.getSheetByName(SHEET_CUMPLIMIENTO);
-    if (sh2 && sh2.getLastRow() > 1) {
-      sh2.getRange(2,1,sh2.getLastRow()-1,sh2.getLastColumn()).getValues().forEach(function(r) {
-        resultado.push({
-          id:r[0], tipo:"CUMPLIMIENTO", fechaRegistro:formatearFecha(r[1]),
-          oficina:r[2], semana:r[3], fecha:formatearFecha(r[4]), estado:r[5],
-          municipio:r[6], parroquia:r[7], comuna:r[8], direccion:r[9],
-          actividad:r[10], vertice:String(r[11]).replace("VÉRTICE ",""),
-          hora:formatearHora(r[12]), participantes:r[13], instituciones:r[14],
-          responsable:r[15], foto:r[16]
-        });
-      });
-    }
+  /* HEADER */
+  header {
+    background: var(--verde-oscuro);
+    border-bottom: 3px solid var(--dorado);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 64px;
   }
-
-  return resultado;
-}
-
-// ─── FORMATEAR FECHA DESDE SHEETS ───
-function formatearFecha(val) {
-  if (!val) return '';
-  if (val instanceof Date) {
-    return Utilities.formatDate(val, "America/Caracas", "dd/MM/yyyy");
-  }
-  return String(val);
-}
-
-// ─── FORMATEAR HORA DESDE SHEETS ───
-function formatearHora(val) {
-  if (!val) return '';
-  if (val instanceof Date) {
-    return Utilities.formatDate(val, "America/Caracas", "hh:mm a");
-  }
-  return String(val);
-}
-
-// ─── UTILIDADES ───
-function obtenerHoja(ss, nombre, headers) {
-  var sheet = ss.getSheetByName(nombre);
-  if (!sheet) {
-    sheet = ss.insertSheet(nombre);
-    var rng = sheet.getRange(1, 1, 1, headers.length);
-    rng.setValues([headers]);
-    rng.setBackground("#0f3d22");
-    rng.setFontColor("#c8a84b");
-    rng.setFontWeight("bold");
-    rng.setFontSize(10);
-    sheet.setFrozenRows(1);
-    sheet.setColumnWidth(1, 100);
-    sheet.setColumnWidth(3, 200);
-    sheet.setColumnWidth(9, 350);
-  }
-  return sheet;
-}
-
-function generarID() {
-  return "REG-" + new Date().getTime();
-}
-
-function jsonResp(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// ============================================================
-// IMPORTANTE: Publicar nueva versión del Apps Script:
-// Implementar → Administrar implementaciones → ✏ Editar
-// → Nueva versión → Implementar
-// ============================================================
