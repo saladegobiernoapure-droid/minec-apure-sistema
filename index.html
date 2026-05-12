@@ -45,3 +45,1237 @@
     z-index: 100;
     height: 64px;
   }
+  .logo-escudo {
+    width: 44px; height: 44px;
+    background: var(--dorado);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .header-title { flex: 1; }
+  .header-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--dorado);
+    line-height: 1;
+  }
+  .header-title p { font-size: 0.7rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; }
+  nav { display: flex; gap: 0.5rem; }
+  nav button {
+    background: transparent;
+    border: 1.5px solid transparent;
+    color: #ccc;
+    padding: 0.4rem 1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  nav button.active, nav button:hover {
+    border-color: var(--dorado);
+    color: var(--dorado);
+    background: rgba(200,168,75,0.08);
+  }
+
+  /* VIEWS */
+  .view { display: none; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  .view.active { display: block; }
+
+  .section-header {
+    display: flex; align-items: flex-end; gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--verde);
+    padding-bottom: 1rem;
+  }
+  .section-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 3px; color: var(--verde-oscuro);
+  }
+  .section-header p { color: var(--gris); font-size: 0.85rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: 2px; color: var(--verde);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    background: #e8f5ee; border: 1px solid var(--verde); color: var(--verde);
+    padding: 0.1rem 0.5rem; border-radius: 2px; letter-spacing: 1px;
+  }
+
+  /* FORMULARIO */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+  .form-full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gris);
+  }
+  .form-group label .req { color: var(--rojo); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: #fff; border: 1.5px solid var(--borde); color: var(--texto);
+    padding: 0.6rem 0.8rem;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 0.9rem;
+    border-radius: 4px; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--verde);
+    box-shadow: 0 0 0 2px rgba(26,107,58,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  select option { background: #fff; color: var(--texto); }
+
+  /* TABS */
+  .form-tabs {
+    display: flex; gap: 0; margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--borde);
+  }
+  .form-tab {
+    padding: 0.7rem 1.5rem; background: transparent; border: none; color: #999;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s;
+  }
+  .form-tab.active { color: var(--verde); border-bottom-color: var(--verde); }
+  .form-panel { display: none; }
+  .form-panel.active { display: block; }
+
+  /* BOTONES */
+  .btn {
+    padding: 0.65rem 1.5rem;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; border-radius: 4px;
+    cursor: pointer; border: none; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--verde); color: #fff; }
+  .btn-primary:hover { background: var(--verde-claro); }
+  .btn-gold { background: var(--dorado); color: #fff; }
+  .btn-gold:hover { background: var(--dorado-claro); }
+  .btn-outline { background: transparent; border: 1.5px solid var(--verde); color: var(--verde); }
+  .btn-outline:hover { background: rgba(26,107,58,0.08); }
+  .btn-danger {
+    background: transparent; border: 1.5px solid var(--rojo); color: var(--rojo);
+    font-size: 0.75rem; padding: 0.35rem 0.8rem;
+  }
+  .btn-danger:hover { background: rgba(192,57,43,0.08); }
+  .btn-row { display: flex; gap: 0.75rem; margin-top: 1.5rem; align-items: center; }
+
+  /* STATS */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .stat-box {
+    background: var(--card-bg); border: 1px solid var(--borde); border-radius: 6px;
+    padding: 1rem 1.2rem; border-left: 3px solid var(--verde);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .stat-box.gold { border-left-color: var(--dorado); }
+  .stat-box.blue { border-left-color: var(--azul); }
+  .stat-box.red  { border-left-color: var(--rojo); }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--negro); line-height: 1; }
+  .stat-label { font-size: 0.7rem; color: var(--gris); letter-spacing: 1px; text-transform: uppercase; margin-top: 0.2rem; }
+
+  /* FILTROS */
+  .filtros { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: flex-end; }
+  .filtros select, .filtros input {
+    background: #fff; border: 1.5px solid var(--borde); color: var(--texto);
+    padding: 0.5rem 0.8rem; font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem; border-radius: 4px; outline: none; min-width: 160px;
+  }
+  .filtros select:focus, .filtros input:focus { border-color: var(--verde); }
+
+  /* TABLA */
+  .tabla-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th {
+    background: var(--verde-oscuro); color: #e8c96a;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.7rem 0.8rem; text-align: left;
+    border-bottom: 2px solid var(--dorado); white-space: nowrap;
+  }
+  td {
+    padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--gris-claro);
+    vertical-align: top; color: var(--texto); max-width: 260px;
+  }
+  tr:hover td { background: #f0f7f2; }
+
+  /* PILLS */
+  .pill {
+    display: inline-block; padding: 0.15rem 0.5rem; border-radius: 2px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 1px;
+  }
+  .tipo-plan { background: rgba(26,107,58,0.1);  color: #1a6b3a; border: 1px solid #2d9657; }
+  .tipo-cum  { background: rgba(184,134,11,0.1); color: #7a5c00; border: 1px solid #b8860b; }
+  .v-pill    { background: rgba(26,107,58,0.08); color: #1a6b3a; border: 1px solid var(--borde); }
+
+  .empty-state { text-align: center; padding: 3rem; color: var(--gris); }
+  .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  /* ALERTA */
+  .alert { padding: 0.8rem 1.2rem; border-radius: 4px; font-size: 0.85rem; margin-bottom: 1rem; display: none; }
+  .alert.success { background: #e8f5ee; border: 1px solid var(--verde); color: #0f3d22; }
+  .alert.error   { background: #fdf0ee; border: 1px solid var(--rojo);  color: #7a1a1a; }
+  .alert.show { display: block; }
+
+  .fecha-chip { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #666; }
+  .act-card {
+    border: 1px solid var(--borde); border-radius: 6px;
+    padding: 1rem; margin-bottom: 1rem; position: relative; background: #fafcfa;
+  }
+
+  /* MODALES */
+  .modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 200;
+    align-items: center; justify-content: center;
+  }
+  .modal-bg.show { display: flex; }
+  .modal {
+    background: #fff; border: 1px solid var(--borde); border-radius: 8px;
+    padding: 2rem; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+  .modal-sm { max-width: 420px; text-align: center; }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; border-bottom: 2px solid var(--verde); padding-bottom: 1rem;
+  }
+  .modal-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--verde-oscuro); }
+  .modal-header.danger { border-bottom-color: var(--rojo); }
+  .modal-header.danger h3 { color: var(--rojo); }
+  .modal-close { background: transparent; border: none; color: #888; font-size: 1.3rem; cursor: pointer; }
+  .detail-row { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; font-size: 0.85rem; }
+  .detail-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gris); min-width: 140px; padding-top: 0.1rem;
+  }
+  .detail-val { color: var(--texto); }
+
+  .input-clave {
+    width: 100%; padding: 0.7rem 1rem; border: 2px solid var(--borde); border-radius: 4px;
+    font-size: 1rem; text-align: center; letter-spacing: 4px; outline: none; margin-bottom: 0.75rem;
+  }
+  .input-clave:focus { border-color: var(--rojo); }
+  .clave-btns { display: flex; gap: 0.75rem; justify-content: center; }
+  .msg-clave { font-size: 0.85rem; color: var(--gris); margin-bottom: 1rem; }
+  .err-clave { color: var(--rojo); font-size: 0.8rem; margin-bottom: 0.75rem; display: none; }
+
+  .btn-corregir {
+    background: transparent;
+    border: 1.5px solid var(--dorado);
+    color: var(--dorado);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.4rem;
+    transition: all 0.2s;
+  }
+  .btn-corregir:hover { background: rgba(184,134,11,0.08); }
+  .btn-corregir:disabled { opacity: 0.5; cursor: wait; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f0f0f0; }
+  ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    .form-grid, .form-grid.three { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    nav button { padding: 0.4rem 0.6rem; font-size: 0.7rem; }
+    header { padding: 0 1rem; }
+    .view { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-escudo">🌿</div>
+  <div class="header-title">
+    <h1>MINEC — Apure</h1>
+    <p>Sistema de Planificación y Cumplimiento Semanal</p>
+  </div>
+  <nav>
+    <button class="active" onclick="showView('registro',this)">📋 Registrar</button>
+    <button onclick="showView('panel',this)">📊 Panel</button>
+  </nav>
+</header>
+
+<!-- ═══ REGISTRO ═══ -->
+<div id="view-registro" class="view active">
+  <div class="section-header">
+    <h2>Registro Semanal</h2>
+    <p>Complete los datos de planificación o cumplimiento de su oficina</p>
+  </div>
+  <div id="alert-form" class="alert"></div>
+  <div class="card">
+    <div class="form-tabs">
+      <button class="form-tab active" onclick="switchTab('planificacion',this)">📅 Planificación</button>
+      <button class="form-tab" onclick="switchTab('cumplimiento',this)">✅ Cumplimiento</button>
+    </div>
+
+    <div class="card-title">🏢 Identificación <span class="badge">OBLIGATORIO</span></div>
+    <div class="form-grid three" style="margin-bottom:1.5rem">
+      <div class="form-group">
+        <label>Oficina / Unidad <span class="req">*</span></label>
+        <select id="oficina">
+          <option value="">— Seleccionar —</option>
+          <option>FORMACIÓN PARA EL ECOSOCIALISMO</option>
+          <option>CALIDAD AMBIENTAL</option>
+          <option>DIVERSIDAD BIOLÓGICA</option>
+          <option>GESTIÓN TERRITORIAL</option>
+          <option>PATRIMONIO FORESTAL</option>
+          <option>FISCALIZACIÓN E IMPACTOS AMBIENTALES</option>
+          <option>OFICINA ADMINISTRATIVA ACHAGUAS</option>
+          <option>OFICINA ADMINISTRATIVA RÓMULO GALLEGOS</option>
+          <option>OFICINA ADMINISTRATIVA MUÑOZ</option>
+          <option>OFICINA ADMINISTRATIVA PÁEZ</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Semana — Fecha Inicio <span class="req">*</span></label>
+        <input type="date" id="semana_inicio">
+      </div>
+      <div class="form-group">
+        <label>Semana — Fecha Fin <span class="req">*</span></label>
+        <input type="date" id="semana_fin">
+      </div>
+    </div>
+
+    <div id="panel-planificacion" class="form-panel active">
+      <div class="card-title">📅 Actividades Planificadas</div>
+      <div id="actividades-plan"></div>
+      <button class="btn btn-outline" onclick="addActividad('plan')" style="margin-top:0.5rem">+ Agregar Actividad</button>
+    </div>
+
+    <div id="panel-cumplimiento" class="form-panel">
+      <div class="card-title">✅ Actividades Cumplidas</div>
+      <div id="actividades-cum"></div>
+      <button class="btn btn-outline" onclick="addActividad('cum')" style="margin-top:0.5rem">+ Agregar Actividad</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="guardarRegistro()">💾 Guardar Registro</button>
+      <button class="btn btn-outline" onclick="limpiarFormulario()">↺ Limpiar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PANEL ═══ -->
+<div id="view-panel" class="view">
+  <div class="section-header">
+    <h2>Panel de Visualización</h2>
+    <p>Registros consolidados — MINEC Apure</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" id="stat-total">0</div>
+      <div class="stat-label">Actividades Total</div>
+    </div>
+    <div class="stat-box gold">
+      <div class="stat-num" id="stat-plan">0</div>
+      <div class="stat-label">Planificadas</div>
+    </div>
+    <div class="stat-box blue">
+      <div class="stat-num" id="stat-cum">0</div>
+      <div class="stat-label">Cumplidas</div>
+    </div>
+    <div class="stat-box red">
+      <div class="stat-num" id="stat-oficinas">0</div>
+      <div class="stat-label">Oficinas Activas</div>
+    </div>
+  </div>
+
+  <div class="filtros">
+    <select id="f-oficina" onchange="renderTabla()">
+      <option value="">Todas las oficinas</option>
+      <option>FORMACIÓN PARA EL ECOSOCIALISMO</option>
+      <option>CALIDAD AMBIENTAL</option>
+      <option>DIVERSIDAD BIOLÓGICA</option>
+      <option>GESTIÓN TERRITORIAL</option>
+      <option>PATRIMONIO FORESTAL</option>
+      <option>FISCALIZACIÓN E IMPACTOS AMBIENTALES</option>
+      <option>OFICINA ADMINISTRATIVA ACHAGUAS</option>
+      <option>OFICINA ADMINISTRATIVA RÓMULO GALLEGOS</option>
+      <option>OFICINA ADMINISTRATIVA MUÑOZ</option>
+      <option>OFICINA ADMINISTRATIVA PÁEZ</option>
+    </select>
+    <select id="f-tipo" onchange="renderTabla()">
+      <option value="">Planificación y Cumplimiento</option>
+      <option value="PLANIFICACIÓN">Solo Planificación</option>
+      <option value="CUMPLIMIENTO">Solo Cumplimiento</option>
+    </select>
+    <select id="f-vertice" onchange="renderTabla()">
+      <option value="">Todos los Vértices</option>
+      <option value="I">Vértice I</option>
+      <option value="II">Vértice II</option>
+      <option value="V">Vértice V</option>
+      <option value="VI">Vértice VI</option>
+      <option value="VII">Vértice VII</option>
+    </select>
+    <input type="text" id="f-buscar" placeholder="🔍 Buscar..." oninput="renderTabla()" style="min-width:200px">
+    <button class="btn btn-gold" onclick="exportarExcel()">⬇ Exportar Excel</button>
+  </div>
+
+  <div id="alert-panel" class="alert"></div>
+
+  <div class="card" style="padding:0">
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th><th>Oficina</th><th>Semana</th><th>Fecha</th>
+            <th>Municipio</th><th>Parroquia</th><th>Vértice</th>
+            <th>Actividad</th><th>Hora</th><th>Lugar</th>
+            <th>Partic.</th><th>Responsable</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body">
+          <tr><td colspan="13">
+            <div class="empty-state">
+              <div class="icon">📋</div>
+              <p>No hay registros aún.</p>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALLE -->
+<div id="modal-bg" class="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Detalle</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- MODAL CLAVE ADMIN -->
+<div id="modal-clave-bg" class="modal-bg" onclick="if(event.target===this)closeClave()">
+  <div class="modal modal-sm">
+    <div class="modal-header danger" style="justify-content:center">
+      <h3>🔐 Confirmar Eliminación</h3>
+    </div>
+    <p class="msg-clave">Ingrese la clave de administrador para eliminar este registro.<br>
+    El registro se borrará del sistema y de Google Sheets.</p>
+    <input class="input-clave" type="password" id="input-clave" placeholder="••••••" maxlength="30"
+      onkeydown="if(event.key==='Enter')confirmarEliminar()">
+    <div class="err-clave" id="err-clave">Clave incorrecta. Intente de nuevo.</div>
+    <div class="clave-btns">
+      <button class="btn btn-danger" onclick="confirmarEliminar()">🗑 Eliminar</button>
+      <button class="btn btn-outline" onclick="closeClave()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// CONFIGURACIÓN
+// ══════════════════════════════════════
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwl5TSkr-N9VyydwoFw4SCGFNCzSVwhZijecc_8JKewvt5PjVf3TMghEtlnt_ug6SdpPQ/exec";
+var CLAVE_ADMIN     = "minec2026";
+var GEMINI_KEY      = "AIzaSyCBKXnHAiU_DH97ITNrkN2Wri3ASrvIpSI";
+var DRIVE_FOLDER_ID = "1DXdowWmjQp7-4BtPu-aLUKCEfMgXXpR9"; // Cambie esta clave cuando desee
+
+// ══════════════════════════════════════
+// PARROQUIAS POR MUNICIPIO
+// ══════════════════════════════════════
+const PARROQUIAS = {
+  "SAN FERNANDO":    ["URBANA SAN FERNANDO","URBANA EL RECREO","PEÑALVER","SAN RAFAEL DE ATAMAICA"],
+  "BIRUACA":         ["BIRUACA"],
+  "ACHAGUAS":        ["URBANA ACHAGUAS","APURITO","EL YAGUAL","GUACHARA","MUCURITAS","QUESERAS DEL MEDIO"],
+  "MUÑOZ":           ["BRUZUAL","MANTECAL","RINCÓN HONDO","SAN VICENTE"],
+  "PÁEZ":            ["URBANA GUASDUALITO","ARAMENDI","EL AMPARO","SAN CAMILO","URDANETA"],
+  "PEDRO CAMEJO":    ["SAN JUAN DE PAYARA","CODAZZI","CUNAVICHE"],
+  "RÓMULO GALLEGOS": ["ELORZA","LA TRINIDAD DE ORICHUNA"],
+};
+
+// ══════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════
+let registros      = JSON.parse(localStorage.getItem('minec_registros') || '[]');
+let actPlanCount   = 0;
+let actCumCount    = 0;
+let idAEliminar    = null;
+
+// ══════════════════════════════════════
+// NAVEGACIÓN
+// ══════════════════════════════════════
+function showView(v, btn) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + v).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (v === 'panel') cargarDesdeSheets();
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.form-tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(el => el.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ══════════════════════════════════════
+// PARROQUIAS DINÁMICAS
+// ══════════════════════════════════════
+function llenarParroquias(selMun, selPar) {
+  const lista = PARROQUIAS[selMun.value] || [];
+  selPar.innerHTML = '<option value="">— Seleccionar —</option>';
+  lista.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p; o.textContent = p;
+    selPar.appendChild(o);
+  });
+  selPar.disabled = lista.length === 0;
+}
+
+// ══════════════════════════════════════
+// ACTIVIDADES DINÁMICAS
+// ══════════════════════════════════════
+function addActividad(tipo) {
+  const container = document.getElementById('actividades-' + tipo);
+  const id = tipo === 'plan' ? ++actPlanCount : ++actCumCount;
+  const div = document.createElement('div');
+  div.className = 'act-card';
+  div.id = 'act-' + tipo + '-' + id;
+
+  const municipios = `
+    <option value="">— Seleccionar —</option>
+    <option>SAN FERNANDO</option><option>BIRUACA</option><option>ACHAGUAS</option>
+    <option>MUÑOZ</option><option>PÁEZ</option><option>PEDRO CAMEJO</option>
+    <option>RÓMULO GALLEGOS</option>`;
+
+  const verticesOpt = `
+    <option value="">—</option>
+    <option value="I">Vértice I</option><option value="II">Vértice II</option>
+    <option value="V">Vértice V</option><option value="VI">Vértice VI</option>
+    <option value="VII">Vértice VII</option>`;
+
+  if (tipo === 'plan') {
+    div.innerHTML = `
+      <button class="btn btn-danger" style="position:absolute;top:0.75rem;right:0.75rem"
+        onclick="this.closest('.act-card').remove()">✕ Quitar</button>
+      <div class="form-grid three" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Fecha <span class="req">*</span></label>
+          <input type="date" name="p_fecha">
+        </div>
+        <div class="form-group">
+          <label>Municipio <span class="req">*</span></label>
+          <select name="p_municipio"
+            onchange="llenarParroquias(this,this.closest('.act-card').querySelector('[name=p_parroquia]'))">
+            ${municipios}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Parroquia</label>
+          <select name="p_parroquia" disabled>
+            <option value="">— Seleccione municipio —</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0.75rem">
+        <label>Actividad por Vértice <span class="req">*</span></label>
+        <textarea name="p_actividad" placeholder="Descripción detallada de la actividad..."></textarea>
+        <button type="button" class="btn-corregir" onclick="corregirTexto(this.previousElementSibling)">✨ Corregir redacción</button>
+      </div>
+      <div class="form-grid three" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Vértice <span class="req">*</span></label>
+          <select name="p_vertice">${verticesOpt}</select>
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" name="p_hora">
+        </div>
+        <div class="form-group">
+          <label>Participantes</label>
+          <input type="number" name="p_participantes" placeholder="Nº" min="0">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Lugar donde se realiza</label>
+          <input type="text" name="p_lugar" placeholder="Ej: Sede MINEC-Apure">
+        </div>
+        <div class="form-group">
+          <label>Vocero / Responsable <span class="req">*</span></label>
+          <input type="text" name="p_vocero" placeholder="Nombre y cargo">
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:0.75rem">
+        <label>Observaciones</label>
+        <input type="text" name="p_obs" placeholder="Opcional...">
+      </div>`;
+  } else {
+    div.innerHTML = `
+      <button class="btn btn-danger" style="position:absolute;top:0.75rem;right:0.75rem"
+        onclick="this.closest('.act-card').remove()">✕ Quitar</button>
+      <div class="form-grid three" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Fecha <span class="req">*</span></label>
+          <input type="date" name="c_fecha">
+        </div>
+        <div class="form-group">
+          <label>Municipio <span class="req">*</span></label>
+          <select name="c_municipio"
+            onchange="llenarParroquias(this,this.closest('.act-card').querySelector('[name=c_parroquia]'))">
+            ${municipios}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Parroquia</label>
+          <select name="c_parroquia" disabled>
+            <option value="">— Seleccione municipio —</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Comuna</label>
+          <input type="text" name="c_comuna" placeholder="Nombre de la comuna">
+        </div>
+        <div class="form-group">
+          <label>Dirección / Lugar</label>
+          <input type="text" name="c_direccion" placeholder="Ej: Sede MINEC-Apure, Calle...">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0.75rem">
+        <label>Descripción y Objetivo <span class="req">*</span></label>
+        <textarea name="c_descripcion" placeholder="Descripción completa de la actividad cumplida y su objetivo..."></textarea>
+        <button type="button" class="btn-corregir" onclick="corregirTexto(this.previousElementSibling)">✨ Corregir redacción</button>
+      </div>
+      <div class="form-grid three" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Vértice <span class="req">*</span></label>
+          <select name="c_vertice">${verticesOpt}</select>
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" name="c_hora">
+        </div>
+        <div class="form-group">
+          <label>Participantes</label>
+          <input type="number" name="c_participantes" placeholder="Nº" min="0">
+        </div>
+      </div>
+      <div class="form-grid" style="margin-bottom:0.75rem">
+        <div class="form-group">
+          <label>Instituciones</label>
+          <input type="text" name="c_instituciones" placeholder="Ej: MINEC, MISIÓN ÁRBOL">
+        </div>
+        <div class="form-group">
+          <label>Responsable <span class="req">*</span></label>
+          <input type="text" name="c_responsable" placeholder="Nombre y cargo">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Registro Fotográfico
+          <span style="color:#888;font-size:0.68rem;font-weight:400;text-transform:none"> (JPG o PNG — máx. 5 MB)</span>
+        </label>
+        <input type="file" name="c_foto_file" accept="image/jpeg,image/png"
+          style="background:#fff;border:1.5px dashed var(--borde);color:var(--gris);padding:0.5rem 0.8rem;
+                 border-radius:4px;font-family:inherit;font-size:0.85rem;width:100%;cursor:pointer">
+        <div name="c_foto_preview" style="margin-top:0.5rem;display:none">
+          <img style="max-width:100%;max-height:200px;border-radius:4px;border:1px solid var(--borde)" alt="Vista previa">
+        </div>
+        <input type="hidden" name="c_foto">
+      </div>`;
+  }
+
+  container.appendChild(div);
+
+  // Preview de foto
+  if (tipo === 'cum') {
+    div.querySelector('[name=c_foto_file]').addEventListener('change', function() {
+      const preview = div.querySelector('[name=c_foto_preview]');
+      const hidden  = div.querySelector('[name=c_foto]');
+      if (!this.files || !this.files[0]) return;
+      if (this.files[0].size > 5 * 1024 * 1024) {
+        alert('La imagen supera los 5 MB. Seleccione una más pequeña.');
+        this.value = ''; return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.style.display = 'block';
+        preview.querySelector('img').src = e.target.result;
+        hidden.value = e.target.result;
+      };
+      reader.readAsDataURL(this.files[0]);
+    });
+  }
+}
+
+// ══════════════════════════════════════
+// GUARDAR
+// ══════════════════════════════════════
+async function guardarRegistro() {
+  const oficina = document.getElementById('oficina').value;
+  const semIni  = document.getElementById('semana_inicio').value;
+  const semFin  = document.getElementById('semana_fin').value;
+
+  if (!oficina || !semIni || !semFin) {
+    showAlert('form', 'error', '⚠ Seleccione la oficina y las fechas de la semana.');
+    return;
+  }
+
+  const semanaLabel = formatFecha(semIni) + ' al ' + formatFecha(semFin);
+  let guardados = 0;
+  const nuevos = [];
+
+  // Planificación
+  document.querySelectorAll('#actividades-plan .act-card').forEach(item => {
+    const f   = item.querySelector('[name=p_fecha]')?.value;
+    const a   = item.querySelector('[name=p_actividad]')?.value?.trim();
+    const v   = item.querySelector('[name=p_vertice]')?.value;
+    const voc = item.querySelector('[name=p_vocero]')?.value?.trim();
+    if (!f || !a || !v || !voc) return;
+    const reg = {
+      id: 'REG-' + Date.now() + '-' + Math.random().toString(36).slice(2,8),
+      tipo: 'PLANIFICACIÓN', oficina, semana: semanaLabel, semIni, semFin,
+      fecha: f,
+      municipio:     item.querySelector('[name=p_municipio]')?.value || '',
+      parroquia:     item.querySelector('[name=p_parroquia]')?.value || '',
+      actividad: a,  vertice: v,
+      hora:          item.querySelector('[name=p_hora]')?.value || '',
+      lugar:         item.querySelector('[name=p_lugar]')?.value || '',
+      participantes: item.querySelector('[name=p_participantes]')?.value || '',
+      responsable:   voc,
+      observaciones: item.querySelector('[name=p_obs]')?.value || '',
+    };
+    registros.push(reg); nuevos.push(reg); guardados++;
+  });
+
+  // Cumplimiento — subir fotos a Drive
+  const cumItems = document.querySelectorAll('#actividades-cum .act-card');
+  for (const item of cumItems) {
+    const f = item.querySelector('[name=c_fecha]')?.value;
+    const d = item.querySelector('[name=c_descripcion]')?.value?.trim();
+    const v = item.querySelector('[name=c_vertice]')?.value;
+    const r = item.querySelector('[name=c_responsable]')?.value?.trim();
+    if (!f || !d || !v || !r) continue;
+
+    let fotoUrl = '';
+    const fotoBase64 = item.querySelector('[name=c_foto]')?.value || '';
+    if (fotoBase64 && fotoBase64.startsWith('data:image')) {
+      fotoUrl = await subirFotoDrive(fotoBase64, oficina, semanaLabel, f);
+    }
+
+    const reg = {
+      id: 'REG-' + Date.now() + '-' + Math.random().toString(36).slice(2,8),
+      tipo: 'CUMPLIMIENTO', oficina, semana: semanaLabel, semIni, semFin,
+      fecha: f,
+      municipio:     item.querySelector('[name=c_municipio]')?.value || '',
+      parroquia:     item.querySelector('[name=c_parroquia]')?.value || '',
+      comuna:        item.querySelector('[name=c_comuna]')?.value || '',
+      direccion:     item.querySelector('[name=c_direccion]')?.value || '',
+      actividad: d,  vertice: v,
+      hora:          item.querySelector('[name=c_hora]')?.value || '',
+      participantes: item.querySelector('[name=c_participantes]')?.value || '',
+      instituciones: item.querySelector('[name=c_instituciones]')?.value || '',
+      responsable:   r,
+      foto:          fotoUrl || fotoBase64,
+    };
+    registros.push(reg); nuevos.push(reg); guardados++;
+  }
+
+  if (guardados === 0) {
+    showAlert('form', 'error', '⚠ Complete al menos una actividad con los campos obligatorios (*).');
+    return;
+  }
+
+  localStorage.setItem('minec_registros', JSON.stringify(registros));
+  showAlert('form', 'success', `⏳ Enviando ${guardados} actividad(es) a Google Sheets...`);
+
+  let errores = 0;
+  await Promise.all(nuevos.map(reg =>
+    fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(reg) })
+      .catch(() => { errores++; })
+  ));
+
+  if (errores > 0) {
+    showAlert('form', 'error', `⚠ ${guardados-errores} enviado(s), ${errores} con error. Guardados localmente.`);
+  } else {
+    showAlert('form', 'success', `✅ ${guardados} actividad(es) guardada(s) y enviada(s) a Google Sheets correctamente.`);
+  }
+  limpiarFormulario();
+}
+
+function limpiarFormulario() {
+  document.getElementById('oficina').value = '';
+  const hoy = new Date().toISOString().slice(0,10);
+  document.getElementById('semana_inicio').value = hoy;
+  document.getElementById('semana_fin').value = hoy;
+  document.getElementById('actividades-plan').innerHTML = '';
+  document.getElementById('actividades-cum').innerHTML = '';
+  actPlanCount = 0; actCumCount = 0;
+  addActividad('plan');
+  addActividad('cum');
+}
+
+// ══════════════════════════════════════
+// PANEL
+// ══════════════════════════════════════
+async function cargarDesdeSheets() {
+  try {
+    const res  = await fetch(APPS_SCRIPT_URL + '?action=leer&tipo=TODOS');
+    const json = await res.json();
+    if (json.ok && Array.isArray(json.data) && json.data.length > 0) {
+      const idsSheets   = new Set(json.data.map(r => String(r.id)));
+      const soloLocales = registros.filter(r => !idsSheets.has(String(r.id)));
+      registros = [...json.data, ...soloLocales];
+      localStorage.setItem('minec_registros', JSON.stringify(registros));
+    }
+  } catch(e) { /* usa datos locales */ }
+  updateStats();
+  renderTabla();
+}
+
+function updateStats() {
+  document.getElementById('stat-total').textContent    = registros.length;
+  document.getElementById('stat-plan').textContent     = registros.filter(r => r.tipo === 'PLANIFICACIÓN').length;
+  document.getElementById('stat-cum').textContent      = registros.filter(r => r.tipo === 'CUMPLIMIENTO').length;
+  document.getElementById('stat-oficinas').textContent = new Set(registros.map(r => r.oficina)).size;
+}
+
+function renderTabla() {
+  updateStats();
+  const fOf = document.getElementById('f-oficina').value;
+  const fTi = document.getElementById('f-tipo').value;
+  const fVe = document.getElementById('f-vertice').value;
+  const fBu = document.getElementById('f-buscar').value.toLowerCase();
+
+  let data = registros.filter(r => {
+    if (fOf && r.oficina !== fOf) return false;
+    if (fTi && r.tipo !== fTi) return false;
+    if (fVe && r.vertice !== fVe) return false;
+    if (fBu && !JSON.stringify(r).toLowerCase().includes(fBu)) return false;
+    return true;
+  }).sort((a,b) => (b.semIni||'').localeCompare(a.semIni||''));
+
+  const tbody = document.getElementById('tabla-body');
+  if (data.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="13"><div class="empty-state">
+      <div class="icon">🔍</div><p>No se encontraron registros.</p></div></td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td><span class="pill ${r.tipo==='PLANIFICACIÓN'?'tipo-plan':'tipo-cum'}">${r.tipo==='PLANIFICACIÓN'?'PLAN':'CUM'}</span></td>
+      <td style="font-size:0.74rem;font-weight:500">${escHtml(r.oficina||'')}</td>
+      <td class="fecha-chip" style="white-space:nowrap">${escHtml(r.semana||'')}</td>
+      <td class="fecha-chip">${formatFecha(r.fecha)}</td>
+      <td style="font-size:0.78rem">${escHtml(r.municipio||'—')}</td>
+      <td style="font-size:0.78rem">${escHtml(r.parroquia||'—')}</td>
+      <td><span class="pill v-pill">V-${escHtml(r.vertice||'')}</span></td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+          title="${escHtml(r.actividad||'')}">${escHtml((r.actividad||'').substring(0,65))}${(r.actividad||'').length>65?'...':''}</td>
+      <td class="fecha-chip">${formatHora(r.hora)}</td>
+      <td style="font-size:0.76rem;max-width:110px">${escHtml(r.lugar||r.direccion||'—')}</td>
+      <td style="text-align:center">${r.participantes||'—'}</td>
+      <td style="font-size:0.76rem">${escHtml(r.responsable||'')}</td>
+      <td style="white-space:nowrap;min-width:100px">
+        <button class="btn btn-outline" style="font-size:0.7rem;padding:0.3rem 0.6rem;display:block;margin-bottom:0.3rem;width:100%"
+          onclick="verDetalle('${escHtml(String(r.id))}')">👁 Ver</button>
+        ${r.tipo==='CUMPLIMIENTO' && r.foto && r.foto.startsWith('data:image') ?
+          `<button class="btn btn-outline" style="font-size:0.7rem;padding:0.3rem 0.6rem;display:block;margin-bottom:0.3rem;width:100%;border-color:var(--azul);color:var(--azul)"
+            onclick="descargarFoto('${escHtml(String(r.id))}')">📷 Foto</button>` : ''}
+        <button class="btn btn-danger" style="display:block;width:100%"
+          onclick="pedirClave('${escHtml(String(r.id))}')">🗑 Borrar</button>
+      </td>
+    </tr>`).join('');
+}
+
+// ══════════════════════════════════════
+// VER DETALLE
+// ══════════════════════════════════════
+function verDetalle(id) {
+  const r = registros.find(x => String(x.id) === String(id));
+  if (!r) return;
+  document.getElementById('modal-title').textContent = r.tipo + ' — ' + r.oficina;
+
+  const campos = [
+    ['Oficina', r.oficina], ['Tipo', r.tipo], ['Semana', r.semana],
+    ['Fecha', formatFecha(r.fecha)], ['Municipio', r.municipio], ['Parroquia', r.parroquia],
+    r.tipo==='CUMPLIMIENTO' ? ['Comuna', r.comuna] : null,
+    r.tipo==='CUMPLIMIENTO' ? ['Dirección', r.direccion] : ['Lugar', r.lugar],
+    ['Actividad / Descripción', r.actividad],
+    ['Vértice', 'Vértice ' + r.vertice], ['Hora', formatHora(r.hora)], ['Participantes', r.participantes],
+    ['Responsable', r.responsable],
+    r.tipo==='CUMPLIMIENTO' ? ['Instituciones', r.instituciones] : ['Observaciones', r.observaciones],
+  ].filter(Boolean);
+
+  let html = campos.filter(([,v]) => v).map(([l,v]) =>
+    `<div class="detail-row">
+      <span class="detail-label">${l}</span>
+      <span class="detail-val">${escHtml(String(v))}</span>
+    </div>`).join('');
+
+  if (r.tipo==='CUMPLIMIENTO' && r.foto && r.foto.startsWith('data:image')) {
+    html += `<div class="detail-row">
+      <span class="detail-label">Foto</span>
+      <div>
+        <img src="${r.foto}" style="max-width:100%;max-height:260px;border-radius:4px;border:1px solid var(--borde);display:block;margin-bottom:0.5rem">
+        <button class="btn btn-outline" style="font-size:0.75rem;padding:0.35rem 0.8rem;border-color:var(--azul);color:var(--azul)"
+          onclick="descargarFoto('${r.id}')">⬇ Descargar foto</button>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-bg').classList.add('show');
+}
+
+function closeModal() { document.getElementById('modal-bg').classList.remove('show'); }
+
+// ══════════════════════════════════════
+// ELIMINAR CON CLAVE ADMIN
+// ══════════════════════════════════════
+function pedirClave(id) {
+  idAEliminar = id;
+  document.getElementById('input-clave').value = '';
+  document.getElementById('err-clave').style.display = 'none';
+  document.getElementById('modal-clave-bg').classList.add('show');
+  setTimeout(() => document.getElementById('input-clave').focus(), 150);
+}
+
+function closeClave() {
+  document.getElementById('modal-clave-bg').classList.remove('show');
+  idAEliminar = null;
+}
+
+async function confirmarEliminar() {
+  const clave = document.getElementById('input-clave').value;
+  if (clave !== CLAVE_ADMIN) {
+    document.getElementById('err-clave').style.display = 'block';
+    document.getElementById('input-clave').value = '';
+    document.getElementById('input-clave').focus();
+    return;
+  }
+
+  // Eliminar localmente
+  registros = registros.filter(r => String(r.id) !== String(idAEliminar));
+  localStorage.setItem('minec_registros', JSON.stringify(registros));
+
+  // Eliminar en Google Sheets
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ accion: 'eliminar', id: idAEliminar })
+    });
+  } catch(e) { /* continúa aunque falle la red */ }
+
+  closeClave();
+  showAlert('panel', 'success', '✅ Registro eliminado correctamente.');
+  renderTabla();
+}
+
+// ══════════════════════════════════════
+// DESCARGAR FOTO
+// ══════════════════════════════════════
+function descargarFoto(id) {
+  const r = registros.find(x => String(x.id) === String(id));
+  if (!r || !r.foto) return;
+  const fecha  = (r.fecha||'').replace(/-/g,'');
+  const ofic   = (r.oficina||'').replace(/\s+/g,'_').substring(0,20);
+  const nombre = `${fecha}_${ofic}.jpg`;
+  const a = document.createElement('a');
+  a.href = r.foto;
+  a.download = nombre;
+  a.click();
+}
+
+// ══════════════════════════════════════
+// EXPORTAR EXCEL (dos hojas)
+// ══════════════════════════════════════
+function exportarExcel() {
+  if (registros.length === 0) { alert('No hay registros para exportar.'); return; }
+
+  const fOf = document.getElementById('f-oficina').value;
+  const fVe = document.getElementById('f-vertice').value;
+
+  // Orden de vértices
+  const ordenV = {'I':1,'II':2,'V':3,'VI':4,'VII':5};
+
+  // ── HOJA PLANIFICACIÓN ──
+  const planHeaders = [
+    'SEMANA','FECHA','ESTADO','MUNICIPIO','PARROQUIA',
+    'ACTIVIDAD POR VÉRTICE','VÉRTICE','HORA','LUGAR',
+    'PARTICIPANTES','VOCERO / RESPONSABLE','OBSERVACIONES','OFICINA'
+  ];
+
+  let planData = registros.filter(r => {
+    if (r.tipo !== 'PLANIFICACIÓN') return false;
+    if (fOf && r.oficina !== fOf) return false;
+    if (fVe && r.vertice !== fVe) return false;
+    return true;
+  }).sort((a,b) => {
+    // 1. Semana
+    const s = (a.semIni||'').localeCompare(b.semIni||'');
+    if (s !== 0) return s;
+    // 2. Vértice
+    const v = (ordenV[a.vertice]||99) - (ordenV[b.vertice]||99);
+    if (v !== 0) return v;
+    // 3. Fecha exacta
+    return (a.fecha||'').localeCompare(b.fecha||'');
+  });
+
+  const planRows = planData.map(r => [
+    r.semana||'', formatFecha(r.fecha), 'APURE',
+    r.municipio||'', r.parroquia||'',
+    r.actividad||'', 'VÉRTICE '+(r.vertice||''), formatHora(r.hora),
+    r.lugar||'', r.participantes||'', r.responsable||'',
+    r.observaciones||'', r.oficina||''
+  ]);
+
+  // ── HOJA CUMPLIMIENTO ──
+  const cumHeaders = [
+    'SEMANA','FECHA','ESTADO','MUNICIPIO','PARROQUIA','COMUNA','DIRECCIÓN',
+    'DESCRIPCIÓN Y OBJETIVO','VÉRTICE','HORA','PARTICIPANTES',
+    'INSTITUCIONES','RESPONSABLE','REGISTRO FOTOGRÁFICO','OFICINA'
+  ];
+
+  let cumData = registros.filter(r => {
+    if (r.tipo !== 'CUMPLIMIENTO') return false;
+    if (fOf && r.oficina !== fOf) return false;
+    if (fVe && r.vertice !== fVe) return false;
+    return true;
+  }).sort((a,b) => {
+    const s = (a.semIni||'').localeCompare(b.semIni||'');
+    if (s !== 0) return s;
+    return (a.fecha||'').localeCompare(b.fecha||'');
+  });
+
+  const cumRows = cumData.map(r => [
+    r.semana||'', formatFecha(r.fecha), 'APURE',
+    r.municipio||'', r.parroquia||'', r.comuna||'', r.direccion||'',
+    r.actividad||'', 'VÉRTICE '+(r.vertice||''), formatHora(r.hora),
+    r.participantes||'', r.instituciones||'', r.responsable||'',
+    r.foto && r.foto.startsWith('data:image') ? '[FOTO ADJUNTA]' : '',
+    r.oficina||''
+  ]);
+
+  // ── NOMBRE DEL ARCHIVO ──
+  const todos = [...planData, ...cumData];
+  let nombreSemana = new Date().toISOString().slice(0,10);
+  if (todos.length > 0) {
+    const inis = todos.map(r => r.semIni||'').filter(Boolean).sort();
+    const fins = todos.map(r => r.semFin||'').filter(Boolean).sort();
+    if (inis.length && fins.length) {
+      nombreSemana = 'Del_' + formatFecha(inis[0]).replace(/\//g,'-') + '_al_' + formatFecha(fins[fins.length-1]).replace(/\//g,'-');
+    }
+  }
+
+  // ── CONSTRUIR WORKBOOK ──
+  const wb = XLSX.utils.book_new();
+
+  // Hoja planificación
+  const wsPlan = XLSX.utils.aoa_to_sheet([planHeaders, ...planRows]);
+  wsPlan['!cols'] = planHeaders.map((_,i) => ({ wch: i===5 ? 50 : i===0 ? 28 : 18 }));
+  XLSX.utils.book_append_sheet(wb, wsPlan, 'PLANIFICACIÓN');
+
+  // Hoja cumplimiento
+  const wsCum = XLSX.utils.aoa_to_sheet([cumHeaders, ...cumRows]);
+  wsCum['!cols'] = cumHeaders.map((_,i) => ({ wch: i===7 ? 50 : i===0 ? 28 : 18 }));
+  XLSX.utils.book_append_sheet(wb, wsCum, 'CUMPLIMIENTO');
+
+  // Descargar
+  XLSX.writeFile(wb, `MINEC_Apure_${nombreSemana}.xlsx`);
+}
+
+// ══════════════════════════════════════
+// UTILIDADES
+// ══════════════════════════════════════
+function formatFecha(d) {
+  if (!d) return '—';
+  d = String(d);
+
+  // Formato ISO completo: 2026-05-06T04:00:00.000Z
+  if (d.includes('T') && d.includes('-') && d.length > 15) {
+    try {
+      const fecha = new Date(d);
+      if (!isNaN(fecha)) {
+        const dia = String(fecha.getUTCDate()).padStart(2,'0');
+        const mes = String(fecha.getUTCMonth()+1).padStart(2,'0');
+        const anio = fecha.getUTCFullYear();
+        return `${dia}/${mes}/${anio}`;
+      }
+    } catch(e) {}
+  }
+
+  // Formato corrupto de Sheets: "06T04:00:00.000Z/05/2026"
+  const corruptoMatch = d.match(/^(\d{1,2})T[\d:.Z]+\/(\d{2})\/(\d{4})$/);
+  if (corruptoMatch) {
+    const dia = corruptoMatch[1].padStart(2,'0');
+    const mes = corruptoMatch[2];
+    const anio = corruptoMatch[3];
+    return `${dia}/${mes}/${anio}`;
+  }
+
+  // Formato normal YYYY-MM-DD
+  const partes = d.split('-');
+  if (partes.length === 3 && partes[0].length === 4) {
+    return `${partes[2].substring(0,2)}/${partes[1]}/${partes[0]}`;
+  }
+
+  // Ya está en DD/MM/YYYY
+  if (d.match(/^\d{2}\/\d{2}\/\d{4}$/)) return d;
+
+  return d;
+}
+
+function formatHora(h) {
+  if (!h) return '—';
+  h = String(h);
+
+  // Formato ISO de Sheets: 1899-12-30T13:47:40.000Z
+  if (h.includes('T') && (h.includes('1899') || h.includes('Z'))) {
+    try {
+      const match = h.match(/T(\d{2}):(\d{2})/);
+      if (match) {
+        let horas = parseInt(match[1]);
+        const mins = match[2];
+        const ampm = horas >= 12 ? 'PM' : 'AM';
+        horas = horas % 12 || 12;
+        return `${String(horas).padStart(2,'0')}:${mins} ${ampm}`;
+      }
+    } catch(e) {}
+  }
+
+  // Formato HH:MM normal
+  if (h.match(/^\d{1,2}:\d{2}$/)) {
+    let [horas, mins] = h.split(':').map(Number);
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    horas = horas % 12 || 12;
+    return `${String(horas).padStart(2,'0')}:${mins.toString().padStart(2,'0')} ${ampm}`;
+  }
+
+  return h;
+}
+function escHtml(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function showAlert(ctx, type, msg) {
+  const el = document.getElementById('alert-' + ctx);
+  el.className = 'alert ' + type + ' show';
+  el.textContent = msg;
+  setTimeout(() => el.classList.remove('show'), 6000);
+}
+
+// ══════════════════════════════════════
+// CORRECCIÓN CON GEMINI
+// ══════════════════════════════════════
+async function corregirTexto(textarea) {
+  const texto = textarea.value.trim();
+  if (!texto) { alert('Escriba el texto antes de corregir.'); return; }
+
+  const btn = textarea.nextElementSibling;
+  btn.disabled = true;
+  btn.textContent = '⏳ Corrigiendo...';
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `Eres un corrector de textos institucionales venezolanos. 
+Corrige el siguiente texto manteniendo exactamente el mismo significado y contenido. 
+Aplica: tildes correctas, mayúsculas al inicio de oraciones, puntuación adecuada, 
+redacción formal institucional y nombres de especies en cursiva si los hay.
+NO agregues ni elimines información. NO expliques los cambios. 
+Devuelve ÚNICAMENTE el texto corregido:
+
+${texto}`
+            }]
+          }]
+        })
+      }
+    );
+    const data = await res.json();
+    const corregido = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+    if (corregido) {
+      textarea.value = corregido;
+      textarea.style.borderColor = 'var(--verde)';
+      setTimeout(() => { textarea.style.borderColor = ''; }, 2000);
+    } else {
+      alert('No se pudo corregir el texto. Intente nuevamente.');
+    }
+  } catch(e) {
+    alert('Error de conexión con Gemini. Verifique su internet.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = '✨ Corregir redacción';
+}
+
+// ══════════════════════════════════════
+// SUBIR FOTO A GOOGLE DRIVE
+// ══════════════════════════════════════
+async function subirFotoDrive(base64, oficina, semana, fecha) {
+  try {
+    // Enviar al Apps Script que sube la foto a Drive
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        accion: 'subirFoto',
+        foto: base64,
+        oficina: oficina,
+        semana: semana,
+        fecha: fecha,
+        folderId: DRIVE_FOLDER_ID
+      })
+    });
+    const json = await res.json();
+    if (json.ok && json.url) return json.url;
+  } catch(e) {}
+  return ''; // Si falla retorna vacío, el registro igual se guarda
+}
+(function() {
+  const hoy = new Date().toISOString().slice(0,10);
+  document.getElementById('semana_inicio').value = hoy;
+  document.getElementById('semana_fin').value = hoy;
+  addActividad('plan');
+  addActividad('cum');
+})();
+</script>
+</body>
+</html>
